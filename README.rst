@@ -30,7 +30,7 @@ Ansible playbooks will then be executed like the following:
 In the code above, the ``ansible-playbook`` command is populated with the
 ``routing_key`` given to us from the event loop plugin and the ``.yml`` suffix
 is appended. The contents of the ``[dict]`` from event loop plugin are written
-to a tempfile (using `tempfile.mkstemp`_) and passed to ``ansible-playbook``
+to a tempfile (using `tmpfile.mkstemp`_) and passed to ``ansible-playbook``
 using the ``-e @FILENAME`` syntax. Finally the playbook is executed.
 
 The Event Loop
