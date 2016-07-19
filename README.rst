@@ -13,9 +13,9 @@ and the ``[dict]`` is a `python`_ `dictionary`_ that contains the payload of the
 event loop which will be fed to the Ansible playbook as `extra variables`_.
 
 The event loop is an abstraction layer, this can be any kind of event loop that
-you can dream up as long as you can write a plugin which has a `python`_
-`generator`_ that will produce tuples of the form ``(routing_key, [dict])`` as
-described above.
+you can dream up as long as you can write a plugin which provides a `python`_
+`generator`_ function called ``looper`` that will produce tuples of the form
+``(routing_key, [dict])`` as described above.
 
 Ansible playbooks will then be executed like the following:
 
@@ -37,9 +37,9 @@ The Event Loop
 ==============
 
 The event loop itself is meant to be the thing that executes ansible playbooks
-while the event loop plugins are meant to an abstraction to the idea of what will
-feed information to the event loop. The original thought was for a message bus
-but even that was thought to be too specific.
+while the plugins are meant to be an abstraction to the idea of what will feed
+information to the event loop. The original idea was for a message bus to be
+the input but even that was thought to be too specific.
 
 Configuration
 =============
@@ -53,11 +53,11 @@ routing keys
 
 In order to limit the routing keys that ``loopabull`` will trigger an action on
 we will define a list of them in our config file. We might want to limit this in
-the scenario of a message bus feeding the event loop plugin and we only want to
-take action on the correct routing keys.
+the scenario of a message bus feeding the event loop plugin and we only
+want to take action on the correct routing keys.
 
-The following example is using the `fedmsg`_ loopabull plugin and the routing
-keys in this example originate from the `Fedora fedmsg`_ specific
+The following example is using the `fedmsg`_ loopabull plugin and the
+routing keys in this example originate from the `Fedora fedmsg`_ specific
 implementation.
 
 .. code-block:: yaml
@@ -77,9 +77,9 @@ is of the string value ``"all"``
 plugins
 -------
 
-List of plugins to use, none are enabled by default and loopabull will exit
-non-zero and throw an error message explaining that a valid configuration file
-must be provided.
+This is a list of plugins to use, none are enabled by default and loopabull will
+exit non-zero and throw an error message explaining that a valid configuration
+file must be provided.
 
 At this time more than one plugin used at a time per loopabull instance is not
 supported.
