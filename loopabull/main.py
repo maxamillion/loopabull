@@ -36,7 +36,9 @@ class Loopabull(object):
             config = yaml.safe_load(conf_yaml)
 
         try:
-            self.plugin = config["plugin"]
+            self.plugin_name = config["plugin"]
+            self.plugin_name_internal = self.plugin_name + "looper"
+            self.plugin_module_name = self.plugin_name.capitalize() + "Looper"
         except IndexError as e:
             print("Invalid config, missing plugin section - {}".format(e))
             sys.exit(1)
@@ -70,13 +72,20 @@ class Loopabull(object):
             plugin_path = os.path.join(
                 os.path.dirname(__file__),
                 'plugins',
-                "{}{}".format(self.plugin,".py"),
+                "{}{}".format(self.plugin_name_internal,".py"),
             )
-            imp.load_source(self.plugin, plugin_path)
+            plugin_module = imp.load_source(
+                self.plugin_name_internal,
+                plugin_path
+            )
+            self.plugin = getattr(
+                plugin_module,
+                self.plugin_module_name
+            )()
         except (IOError, OSError, ImportError, SyntaxError) as e:
             print(
                 "Failure to load module: {} : {} - {}".format(
-                    self.plugin,
+                    self.plugin_name,
                     plugin_path,
                     e
                 )
@@ -96,7 +105,7 @@ class Loopabull(object):
 
                 ansible_sp = subprocess.Popen(
                     "ansible-playbook {}.yml -i {} -e @{}".format(
-                        plugin_rk,
+                        os.path.join(self.ansible["playbooks_dir"], plugin_rk),
                         self.ansible["inventory_path"],
                         tmp_varfile[-1]
                     ).split(),

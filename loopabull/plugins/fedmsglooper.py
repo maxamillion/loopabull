@@ -1,13 +1,13 @@
 #
 # Loopabull fedmsg plugin
+#   http://www.fedmsg.com/en/latest/
 #
-
-import fedmsg
 
 from loopabull.plugin import Plugin
 
+import fedmsg
 
-class Fedmsg(Plugin):
+class FedmsgLooper(Plugin):
     """
     Loopabull plugin to implement looper for fedmsg event loop
     """
@@ -15,8 +15,8 @@ class Fedmsg(Plugin):
         """
         stub init
         """
-        super(Fedmsg, self).__init__(self)
-        print __name__
+        self.key = "FedmsgLooper"
+        super(FedmsgLooper, self).__init__(self)
 
     def looper(self):
         """

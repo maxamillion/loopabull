@@ -107,6 +107,31 @@ Provide some information about ansible. Currently we need ``inventory_path`` and
       inventory_path: /path/to/inventory.txt
       playbooks_dir: /path/to/dir/where/playbooks/are/
 
+Writing Plugins
+===============
+
+.. FIXME
+
+TODO
+
+Hacking / Example
+=================
+
+An example of executing this from git checkout using the provided examples
+configurations.
+
+.. code-block:: bash
+
+    $ git clone https://github.com/maxamillion/loopabull.git
+
+    $ cd loopabull/
+
+    $ PYTHONPATH=. python loopabull/main.py examples/configs/fedmsg_example.yml
+
+
+This is also how you can hack on loopabull in your local checkout using the same
+example command as above.
+
 
 Creators
 ========

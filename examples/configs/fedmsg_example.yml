@@ -1,6 +1,6 @@
 ansible:
   playbooks_dir: examples/playbooks
-  inventory_path: examples/inventory
+  inventory_path: examples/inventory.txt
 
 routing_keys:
     - org.fedoraproject.prod.ansible.playbook.start
