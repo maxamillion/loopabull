@@ -165,8 +165,19 @@ Creators
 - `Adam Miller <https://fedoraproject.org/wiki/User:Maxamillion>`_
 - `Ralph Bean <http://threebean.org/>`_
 
+Image Credit
+------------
+
+The (currently interim) logo originated as a Public Domain entry found on
+`Wikimedia Commons
+<https://commons.wikimedia.org/wiki/File:Bull_cartoon_04.svg>`_ and was
+originally created by `Mariana Ruiz Villarreal
+<https://commons.wikimedia.org/wiki/User:LadyofHats>`_. It was then (very
+amateurly/badly) edited by `Adam Miller`_.
 
 .. _YAML: http://yaml.org/
+.. _Adam Miller: https://fedoraproject.org/wiki/User:Maxamillion
+.. _Ralph Bean: http://threebean.org/
 .. _python: https://www.python.org/
 .. _fedmsg: http://www.fedmsg.com/en/latest/
 .. _Ansible: https://github.com/ansible/ansible
