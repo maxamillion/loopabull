@@ -140,6 +140,10 @@ Example below (filename ``examplelooper.py``:
 Note that the configuration file entry for this will simply be "example" and the
 rest of the mapping of the plugin to it's namespace is handled internally.
 
+.. code-block:: yaml
+
+    plugin: example
+
 Hacking / Example
 =================
 
