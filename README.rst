@@ -95,6 +95,19 @@ supported.
 
     plugin: fedmsg
 
+ansible
+-------
+
+Provide some information about ansible. Currently we need ``inventory_path`` and
+``playbooks_dir``.
+
+.. clode-block:: yaml
+
+    ansible:
+      inventory_path: /path/to/inventory.txt
+      playbooks_dir: /path/to/dir/where/playbooks/are/
+
+
 Creators
 ========
 

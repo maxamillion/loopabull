@@ -53,7 +53,7 @@ class Loopabull(object):
             self.ansible = config["ansible"]
             if 'inventory_path' not in self.ansible.keys():
                 raise IndexError
-            if 'playbook_dir' not in self.ansible.keys():
+            if 'playbooks_dir' not in self.ansible.keys():
                 raise IndexError
         except IndexError as e:
             print(

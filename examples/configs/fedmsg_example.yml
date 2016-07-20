@@ -1,5 +1,5 @@
 ansible:
-  playbook_dir: examples/playbooks
+  playbooks_dir: examples/playbooks
   inventory_path: examples/inventory
 
 routing_keys:
