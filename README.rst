@@ -47,6 +47,9 @@ the input but even that was thought to be too specific.
 Configuration
 =============
 
+.. note::
+    Example configs can be found in the ``examples`` directory.
+
 The configuration file will be `YAML`_ to follow in the trend of Ansible, this
 config file will be passed to ``loopabull`` at execution time and will decide how
 the application functions
@@ -77,20 +80,20 @@ is of the string value ``"all"``
     routing_keys:
       - all
 
-plugins
+plugin
 -------
 
-This is a list of plugins to use, none are enabled by default and loopabull will
-exit non-zero and throw an error message explaining that a valid configuration
-file must be provided.
+This is a simple key/value assignment of the string representation of the plugin
+to use as plugin to feed information to the event loop. None are enabled by
+default and loopabull will exit non-zero and throw an error message explaining
+that a valid configuration file must be provided.
 
 At this time more than one plugin used at a time per loopabull instance is not
 supported.
 
 .. clode-block:: yaml
 
-    plugins:
-      - fedmsg
+    plugin: fedmsg
 
 Creators
 ========

@@ -1,15 +1,12 @@
 class Plugin(object):
     """ abstract plugin class """
 
-    # unique plugin identification
-    # output of this plugin can be found in results specified with this key,
-    # same thing goes for input: use this key for providing input for this plugin
-    key = None
-
-    def __init__(self, *args, **kwargs):
+    def __init__(self, key):
         """
         constructor
         """
+
+        self.key = key
 
     def __str__(self):
         return "{}".format(self.key)
@@ -36,3 +33,4 @@ class Plugin(object):
         """
         raise NotImplementedError()
 
+# vim: set expandtab sw=4 sts=4 ts=4

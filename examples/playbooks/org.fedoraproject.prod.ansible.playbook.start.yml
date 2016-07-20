@@ -1,0 +1,6 @@
+---
+- name: ansible.playbook.start
+  hosts: engine
+  tasks:
+  - name: testing ansible
+    shell: "echo {{ msg.playbook }}"
