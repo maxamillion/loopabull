@@ -91,7 +91,7 @@ that a valid configuration file must be provided.
 At this time more than one plugin used at a time per loopabull instance is not
 supported.
 
-.. clode-block:: yaml
+.. code-block:: yaml
 
     plugin: fedmsg
 
@@ -101,7 +101,7 @@ ansible
 Provide some information about ansible. Currently we need ``inventory_path`` and
 ``playbooks_dir``.
 
-.. clode-block:: yaml
+.. code-block:: yaml
 
     ansible:
       inventory_path: /path/to/inventory.txt
