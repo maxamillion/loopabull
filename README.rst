@@ -2,6 +2,8 @@
 loopabull
 =========
 
+.. image:: images/loopable.png
+
 NOTE: THIS IS PRE-ALPHA QUALITY AT THIS TIME - UNDER HEAVY DEVELOPMENT
 ======================================================================
 
@@ -95,6 +97,9 @@ supported.
 
     plugin: fedmsg
 
+Current list of available plugins:
+* fedmsg
+
 ansible
 -------
 
@@ -110,9 +115,30 @@ Provide some information about ansible. Currently we need ``inventory_path`` and
 Writing Plugins
 ===============
 
-.. FIXME
+Something to note is that in Loopabull, plugins are internally called "loopers"
+for no real reason other than to isolate the namespace so that we don't collide
+with the modules uses as data providers to the plugins.
 
-TODO
+As such, plugins shall be named ``${PLUGIN_NAME}looper.py`` and implement
+a class named ``${PLUGIN_NAME_CAPITALIZED}Looper``
+
+Example below (filename ``examplelooper.py``:
+
+.. code-block:: python
+
+    from loopabull.plugin import Plugin
+
+    class ExampleLooper(Plugin):
+        def __init__(self):
+            self.key = "ExampleLooper"
+            super(ExampleLooper, self).__init__(self)
+
+        def looper(self):
+            # A python generator implementation
+            yield (router_key, dict(data))
+
+Note that the configuration file entry for this will simply be "example" and the
+rest of the mapping of the plugin to it's namespace is handled internally.
 
 Hacking / Example
 =================
