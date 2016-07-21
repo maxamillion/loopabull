@@ -98,7 +98,7 @@ class Loopabull(object):
         """
 
         for plugin_rk, plugin_dict in self.plugin.looper():
-            if plugin_rk in self.routing_keys:
+            if plugin_rk in self.routing_keys or self.routing_keys[0] == "all":
                 tmp_varfile = tempfile.mkstemp()
                 with open(tmp_varfile[-1], 'w') as yaml_file:
                     yaml.safe_dump(plugin_dict, yaml_file, allow_unicode=False)
