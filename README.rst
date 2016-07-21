@@ -98,6 +98,7 @@ supported.
     plugin: fedmsg
 
 Current list of available plugins:
+
 * fedmsg
 
 ansible
