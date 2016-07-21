@@ -107,11 +107,15 @@ ansible
 Provide some information about ansible. Currently we need ``inventory_path`` and
 ``playbooks_dir``.
 
+There is also the ability to optionally pass a ``modules_dir`` which will tell
+``ansible-playbook`` where to find ansible modules not in the default location.
+
 .. code-block:: yaml
 
     ansible:
       inventory_path: /path/to/inventory.txt
       playbooks_dir: /path/to/dir/where/playbooks/are/
+      modules_dir: /path/to/custom/modules/location/
 
 Writing Plugins
 ===============

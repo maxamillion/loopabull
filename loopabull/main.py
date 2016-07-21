@@ -24,8 +24,14 @@ class Loopabull(object):
         Loopable __init__
         """
 
+        # set variable from conf file
         self.load_config(config_path)
+
+        # load plugin
         self.load_plugin()
+
+        # put together the
+        self.compose_ansible_playbook_command()
 
     def load_config(self, config_path):
         """
@@ -53,15 +59,30 @@ class Loopabull(object):
 
         try:
             self.ansible = config["ansible"]
-            if 'inventory_path' not in self.ansible.keys():
+            if 'inventory_path' not in self.ansible:
                 raise IndexError
-            if 'playbooks_dir' not in self.ansible.keys():
+            if 'playbooks_dir' not in self.ansible:
                 raise IndexError
         except IndexError as e:
             print(
                 "Invalid config, missing valid ansible section - {}".format(e)
             )
             sys.exit(1)
+
+    def compose_ansible_playbook_command(self):
+        """
+        Put together ansible-playbook command with different options based on
+        configuration settings
+        """
+
+        ansible_cmd = "ansible-playbook -i {}".format(
+            self.ansible["inventory_path"]
+        )
+
+        if 'modules_dir' in self.ansible:
+            ansible_cmd += " -M {}".format(self.ansible["modules_dir"])
+
+        self.ansible_cmd = ansible_cmd
 
     def load_plugin(self):
         """
@@ -104,10 +125,10 @@ class Loopabull(object):
                     yaml.safe_dump(plugin_dict, yaml_file, allow_unicode=False)
 
                 ansible_sp = subprocess.Popen(
-                    "ansible-playbook {}.yml -i {} -e @{}".format(
+                    "{} -e @{} {}.yml".format(
+                        self.ansible_cmd,
+                        tmp_varfile[-1],
                         os.path.join(self.ansible["playbooks_dir"], plugin_rk),
-                        self.ansible["inventory_path"],
-                        tmp_varfile[-1]
                     ).split(),
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE
