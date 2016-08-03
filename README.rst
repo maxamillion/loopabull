@@ -38,6 +38,36 @@ is appended. The contents of the ``[dict]`` from event loop plugin are written
 to a tempfile (using `tmpfile.mkstemp`_) and passed to ``ansible-playbook``
 using the ``-e @FILENAME`` syntax. Finally the playbook is executed.
 
+::
+
+    +-----------------+             +---------------+
+    |                 |             |               |
+    |    Events       +------------>|  Looper       |
+    |                 |             |   (plugin)    |
+    |                 |             |               |
+    +-----------------+             +---------------+
+                                                 |
+                                                 |
+                 +-------------------+           |
+                 |                   |           |
+                 |                   |           |
+                 |    Loopabull      +<----------+
+                 |  (Event Loop)     |
+                 |                   |
+                 +---------+---------+
+                           |
+                           |
+                           |
+                           |
+                           V
+                +----------+-----------+
+                |                      |
+                |   ansible-playbook   |
+                |                      |
+                +----------------------+
+
+
+
 The Event Loop
 ==============
 
