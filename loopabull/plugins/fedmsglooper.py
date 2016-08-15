@@ -22,5 +22,5 @@ class FedmsgLooper(Plugin):
         """
         Implementation of the generator to feed the event loop
         """
-        for name, endpoint, topic, msg in fedmsg.tail_messages():
+        for name, endpoint, topic, msg in fedmsg.tail_messages(mute=True):
             yield (topic, dict(msg))

@@ -1,5 +1,5 @@
 ---
-- name: ansible.playbook.start
+- name: buildsys.build.state.change
   hosts: engine
   gather_facts: false
   tasks:
