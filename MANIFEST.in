@@ -2,6 +2,8 @@ include README.rst
 include LICENSE
 include systemd/*
 include examples/*
+include examples/configs/*
+include examples/playbooks/*
 include man/*
 include requirements.txt
 include requirements-test.txt
