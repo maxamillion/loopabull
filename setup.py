@@ -27,8 +27,6 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
-import sys
-
 install_requires = []
 with open('requirements.txt', 'r') as req_file:
     for line in req_file:
@@ -46,6 +44,12 @@ setup(
     version='0.0.1',
     description=description,
     long_description=description,
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: System :: Utilities',
+    ],
     author='Adam Miller',
     author_email='admiller@redhat.com',
     url='https://github.com/maxamillion/loopabull',
@@ -57,3 +61,4 @@ setup(
     include_package_data=True,
     scripts=['bin/loopabull'],
 )
+# vim: set expandtab sw=4 sts=4 ts=4
