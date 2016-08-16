@@ -48,7 +48,7 @@ setup(
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 2.7',
-        'Topic :: System :: Utilities',
+        'Topic :: System :: Systems Administration',
     ],
     author='Adam Miller',
     author_email='admiller@redhat.com',
