@@ -1,6 +1,8 @@
 =========
 loopabull
 =========
+.. image:: https://badge.fury.io/py/loopabull.svg
+    :target: https://badge.fury.io/py/loopabull
 
 .. image:: https://raw.githubusercontent.com/maxamillion/loopabull/master/images/loopabull.png
 
