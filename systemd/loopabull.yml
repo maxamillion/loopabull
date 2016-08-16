@@ -15,9 +15,7 @@ plugin: fedmsg
 # that should be acted upon (i.e. - these keys should trigger an ansible
 # playbook by the same name).
 routing_keys:
-  - routingkey1
-  - routingkey2
-
+  - org.fedoraproject.prod.buildsys.build.state.change
 
 # ansible
 #
@@ -28,5 +26,5 @@ routing_keys:
 #     The full path location of the directory containing your playbooks that
 #     coorelate to the routing_keys
 ansible:
-  playbooks_dir: examples/playbooks
-  inventory_path: examples/inventory.txt
+  playbooks_dir: /usr/share/doc/loopabull/examples/playbooks/
+  inventory_path: /usr/share/doc/loopabull/examples/inventory.txt
