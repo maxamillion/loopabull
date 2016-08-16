@@ -1,0 +1,17 @@
+# It is not recommended to modify this file in-place, because it will be
+# overwritten during package upgrades.  If you want to customize, the best
+# way is to use the "systemctl edit" command to create an override unit.
+
+[Unit]
+Description=Event loop driven Ansible execution engine
+Documentation=https://github.com/maxamillion/loopabull
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/sysconfig/loopabull
+ExecStart=/usr/bin/loopabull $CONFIG_FILE
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+# /etc/sysconfig/loopabull
+#
+# This file is used to configure various aspects of the loopabull systemd
+# service definition
+#
+
+# Path to config file
+CONFIG_FILE=/etc/loopabull.yml
