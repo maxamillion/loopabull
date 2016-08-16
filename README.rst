@@ -200,6 +200,25 @@ This is also how you can hack on loopabull in your local checkout using the same
 example command as above.
 
 
+Installing
+==========
+
+Distro Packaging
+----------------
+
+If you find yourself on a `Fedora`_, `Red Hat Enterprise Linux`_, or `CentOS`_
+system then you can use the `this COPR yum/dnf repository`_ and simply install
+with ``yum`` or ``dnf``.
+
+pypi
+----
+
+Loopabull is currently available in pypi.
+
+::
+
+    pip install loopabull
+
 Creators
 ========
 
@@ -217,6 +236,9 @@ originally created by `Mariana Ruiz Villarreal
 amateurly/badly) edited by `Adam Miller`_.
 
 .. _YAML: http://yaml.org/
+.. _Fedora: https://getfedora.org/
+.. _CentOS: https://www.centos.org/
+.. _Red Hat Enterprise Linux: https://www.redhat.com/rhel
 .. _Adam Miller: https://fedoraproject.org/wiki/User:Maxamillion
 .. _Ralph Bean: http://threebean.org/
 .. _python: https://www.python.org/
@@ -231,4 +253,5 @@ amateurly/badly) edited by `Adam Miller`_.
     https://docs.python.org/3/library/stdtypes.html?highlight=dict#dict
 .. _extra variables:
     http://docs.ansible.com/ansible/playbooks_variables.html#passing-variables-on-the-command-line
-
+.. _this COPR yum/dnf repository:
+    https://copr.fedorainfracloud.org/coprs/maxamillion/loopabull/
