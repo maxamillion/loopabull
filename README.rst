@@ -191,7 +191,7 @@ configurations.
 
     $ cd loopabull/
 
-    $ PYTHONPATH=. python loopabull/main.py examples/configs/fedmsg_example.yml
+    $ PYTHONPATH=. bin/loopabull examples/configs/fedmsg_example.yml
 
 
 This is also how you can hack on loopabull in your local checkout using the same

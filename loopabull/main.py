@@ -138,16 +138,5 @@ class Loopabull(object):
                 print ansible_err
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description="event loop driven ansible execution engine"
-    )
-
-    parser.add_argument('config', help='path to loopabull YAML config file')
-
-    args = parser.parse_args()
-
-    lbull = Loopabull(args.config)
-    lbull.run()
 
 # vim: set expandtab sw=4 sts=4 ts=4

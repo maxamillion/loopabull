@@ -24,3 +24,6 @@ class FedmsgLooper(Plugin):
         """
         for name, endpoint, topic, msg in fedmsg.tail_messages(mute=True):
             yield (topic, dict(msg))
+
+
+# vim: set expandtab sw=4 sts=4 ts=4

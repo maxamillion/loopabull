@@ -55,5 +55,5 @@ setup(
     test_suite='py.test',
     packages=find_packages(),
     include_package_data=True,
-    zip_safe=False,
+    scripts=['bin/loopabull'],
 )
