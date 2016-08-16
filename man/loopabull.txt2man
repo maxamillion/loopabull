@@ -1,0 +1,19 @@
+NAME
+  loopabull
+
+SYNOPSIS
+  loopabull CONFIG
+
+DESCRIPTION
+  loopabull is an event loop driven Ansible playbook execution engine
+
+  loopabull is generally meant to be executed as a daemon process via
+  systemd(1), however it can be run interactively by passing the path to a
+  configuration file as the only argument.
+
+EXAMPLE
+
+  $ loopabull /etc/loopabull.yml
+
+SEE ALSO
+  ansible(1), ansible-playbook(1)
