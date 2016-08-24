@@ -16,7 +16,7 @@ class Plugin(object):
 
     def looper(self):
         """
-        each plugin has to implement this method
+        each looper plugin has to implement this method
 
         this method should be generator that yields the following tuple:
 
@@ -30,6 +30,19 @@ class Plugin(object):
             for routing_key, payload_dict in plugin.looper():
                 # do something
 
+        """
+        raise NotImplementedError()
+
+    def translate_path(self, routing_key):
+        """
+        each path translator plugin has to implement this method
+
+        this method should take a string(routing_key) and return string with a
+        path to a playbook ans the leading "playbook/" directory and the post
+        ".yml" file type.
+
+        Example usage:
+            playbook = plugin.translate_path("com.example.playbooks.install")
         """
         raise NotImplementedError()
 
