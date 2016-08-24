@@ -9,7 +9,7 @@ class RkdirectoryTranslator(Plugin):
     """
     Loopabull plugin to convert routing_keys to OS independent file paths.
     """
-    def __init__(self):
+    def __init__(self, config={}):
         """
         stub init
         """

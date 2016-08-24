@@ -40,17 +40,14 @@ class Loopabull(object):
 
         self.plugins_metadata = dict()
 
-        # Setup the looper plugin metadata
-        try:
-            self.plugins_metadata["looper"] = self.compose_plugin_dict(config["plugin"], "looper")
-        except IndexError as e:
-            print("Invalid config, missing plugin section - {}".format(e))
-            sys.exit(1)
-
-        try:
-            self.plugins_metadata["translator"] = self.compose_plugin_dict(config["path_translator"], "translator")
-        except KeyError as e:
-            self.plugins_metadata["translator"] = self.compose_plugin_dict("rkname", "translator")
+        # Load user plugins
+        for plugin, plugin_config in config["plugins"].items():
+            self.compose_plugin_dict(plugin_config, plugin.lower())
+        # Fall back to defaults
+        if "looper" not in self.plugins_metadata:
+            self.compose_plugin_dict({"name": "fedmsg"}, "looper")
+        if "translator" not in self.plugins_metadata:
+            self.compose_plugin_dict({"name": "rkname"}, "translator")
 
         try:
             self.routing_keys = config["routing_keys"]
@@ -71,11 +68,11 @@ class Loopabull(object):
             )
             sys.exit(1)
 
-    def compose_plugin_dict(self, name, plugin_type):
+    def compose_plugin_dict(self, plugin_config, plugin_type):
         """
         A generic composer for setting up a plugins metadata for loading later on
         """
-        name = name.lower()
+        name = plugin_config["name"].lower()
         plugin_type = plugin_type.lower()
 
         plugin_data = dict()
@@ -83,8 +80,9 @@ class Loopabull(object):
         plugin_data["plugin_type"] = plugin_type
         plugin_data["internal_name"] = name + plugin_type
         plugin_data["module_name"] = name.capitalize() + plugin_type.capitalize()
+        plugin_data["config"] = plugin_config
 
-        return plugin_data
+        self.plugins_metadata[plugin_type] = plugin_data
 
     def load_plugin(self):
         """
@@ -110,7 +108,7 @@ class Loopabull(object):
                 self.plugins[plugin_meta["plugin_type"]] = getattr(
                     plugin_module,
                     plugin_meta["module_name"]
-                )()
+                )(plugin_meta["config"])
             except (IOError, OSError, ImportError, SyntaxError, KeyError) as e:
                 print(
                     "Failure to load module: {} : {} - {}".format(

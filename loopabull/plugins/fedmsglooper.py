@@ -11,7 +11,7 @@ class FedmsgLooper(Plugin):
     """
     Loopabull plugin to implement looper for fedmsg event loop
     """
-    def __init__(self):
+    def __init__(self, config={}):
         """
         stub init
         """

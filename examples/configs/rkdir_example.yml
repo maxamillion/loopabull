@@ -6,5 +6,11 @@ ansible:
 routing_keys:
     - org.fedoraproject.dev.logger.hello_world
 
-plugin: fedmsg
-path_translator: rkdirectory
+plugins:
+  looper:
+    name: redis
+    host: 127.0.0.1
+    port: 6379
+    db: 0
+  translator:
+    name: rkdirectory

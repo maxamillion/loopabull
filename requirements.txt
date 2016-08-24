@@ -1,3 +1,4 @@
 ansible
 fedmsg
 PyYAML
+redis
