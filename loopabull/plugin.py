@@ -38,7 +38,7 @@ class Plugin(object):
         each path translator plugin has to implement this method
 
         this method should take a string(routing_key) and return string with a
-        path to a playbook ans the leading "playbook/" directory and the post
+        path to a playbook sans the leading "playbook/" directory and the post
         ".yml" file type.
 
         Example usage:

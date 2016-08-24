@@ -7,7 +7,7 @@ from loopabull.plugin import Plugin
 
 class RkdirectoryTranslator(Plugin):
     """
-    Loopabull PTranslator to convert routing_keys to OS independent file paths.
+    Loopabull plugin to convert routing_keys to OS independent file paths.
     """
     def __init__(self):
         """
