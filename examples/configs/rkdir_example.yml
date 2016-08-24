@@ -1,0 +1,9 @@
+ansible:
+  playbooks_dir: examples/playbooks
+  inventory_path: examples/inventory.txt
+
+routing_keys:
+    - org.fedoraproject.dev.logger.hello_world
+
+plugin: fedmsg
+path_translator: rkdirectory

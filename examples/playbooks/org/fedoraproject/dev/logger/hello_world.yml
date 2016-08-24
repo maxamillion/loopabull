@@ -1,0 +1,6 @@
+---
+- name: hello.world
+  hosts: engine
+  gather_facts: false
+  tasks:
+  - debug: var=msg

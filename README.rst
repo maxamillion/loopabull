@@ -132,6 +132,8 @@ supported.
 Current list of available plugins:
 
 * fedmsg
+* rkdirectory
+* rkname
 
 ansible
 -------
