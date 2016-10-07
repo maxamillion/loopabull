@@ -1,6 +1,7 @@
 ansible:
   playbooks_dir: examples/playbooks
-  inventory_path: examples/inventory.txt
+  cfg_file_path: examples/ansible.cfg
+  playbook_cmd: /usr/bin/ansible-playbook
 
 routing_keys:
     - org.fedoraproject.dev.logger.hello_world

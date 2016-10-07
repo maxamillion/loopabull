@@ -30,9 +30,6 @@ class Loopabull(object):
         # load plugin
         self.load_plugin()
 
-        # put together the
-        self.compose_ansible_playbook_command()
-
     def load_config(self, config_path):
         """
         Load the various values from the config
@@ -65,10 +62,9 @@ class Loopabull(object):
 
         try:
             self.ansible = config["ansible"]
-            if 'inventory_path' not in self.ansible:
-                raise IndexError
-            if 'playbooks_dir' not in self.ansible:
-                raise IndexError
+            self.ansible['playbooks_dir']
+            self.ansible['cfg_file_path']
+            self.ansible['playbook_cmd']
         except IndexError as e:
             print(
                 "Invalid config, missing valid ansible section - {}".format(e)
@@ -89,21 +85,6 @@ class Loopabull(object):
         plugin_data["module_name"] = name.capitalize() + plugin_type.capitalize()
 
         return plugin_data
-
-    def compose_ansible_playbook_command(self):
-        """
-        Put together ansible-playbook command with different options based on
-        configuration settings
-        """
-
-        ansible_cmd = "ansible-playbook -i {}".format(
-            self.ansible["inventory_path"]
-        )
-
-        if 'modules_dir' in self.ansible:
-            ansible_cmd += " -M {}".format(self.ansible["modules_dir"])
-
-        self.ansible_cmd = ansible_cmd
 
     def load_plugin(self):
         """
@@ -150,20 +131,23 @@ class Loopabull(object):
                 with open(tmp_varfile[-1], 'w') as yaml_file:
                     yaml.safe_dump(plugin_dict, yaml_file, allow_unicode=False)
 
+                cmd = [self.ansible['playbook_cmd']]
+                cmd.append(os.path.join(
+                    self.ansible['playbooks_dir'],
+                    self.plugins["translator"].translate_path(plugin_rk) + '.yml',
+                ))
+                cmd.extend(['-e', tmp_varfile[-1]])
+
+                print 'Running: %s' % cmd
+
                 ansible_sp = subprocess.Popen(
-                    "{} -e @{} {}.yml".format(
-                        self.ansible_cmd,
-                        tmp_varfile[-1],
-                        os.path.join(
-                            self.ansible["playbooks_dir"],
-                            self.plugins["translator"].translate_path(plugin_rk)
-                        ),
-                    ).split(),
+                    cmd,
+                    env={'ANSIBLE_CONFIG': self.ansible['cfg_file_path']},
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE
                 )
                 ansible_out, ansible_err = ansible_sp.communicate()
-                print ansible_out
-                print ansible_err
+                print 'Out: %s' % ansible_out
+                print 'Err: %s' % ansible_err
 
 # vim: set expandtab sw=4 sts=4 ts=4
