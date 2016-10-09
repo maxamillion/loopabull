@@ -142,12 +142,8 @@ class Loopabull(object):
 
                 ansible_sp = subprocess.Popen(
                     cmd,
-                    env={'ANSIBLE_CONFIG': self.ansible['cfg_file_path']},
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE
+                    env={'ANSIBLE_CONFIG': self.ansible['cfg_file_path']}
                 )
-                ansible_out, ansible_err = ansible_sp.communicate()
-                print 'Out: %s' % ansible_out
-                print 'Err: %s' % ansible_err
+                ansible_sp.communicate()
 
 # vim: set expandtab sw=4 sts=4 ts=4
