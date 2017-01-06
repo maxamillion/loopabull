@@ -12,6 +12,7 @@ Type=simple
 EnvironmentFile=-/etc/sysconfig/loopabull
 ExecStart=/usr/bin/loopabull $CONFIG_FILE
 Restart=on-failure
+PrivateTmp=yes
 
 [Install]
 WantedBy=multi-user.target
