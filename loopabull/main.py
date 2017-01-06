@@ -136,7 +136,7 @@ class Loopabull(object):
                     self.ansible['playbooks_dir'],
                     self.plugins["translator"].translate_path(plugin_rk) + '.yml',
                 ))
-                cmd.extend(['-e', tmp_varfile[-1]])
+                cmd.extend(['-e', '@{}'.format(tmp_varfile[-1])])
 
                 print 'Running: %s' % cmd
 

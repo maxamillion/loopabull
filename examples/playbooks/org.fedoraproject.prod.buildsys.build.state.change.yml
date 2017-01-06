@@ -1,6 +1,6 @@
 ---
 - name: buildsys.build.state.change
-  hosts: engine
+  hosts: localhost
   gather_facts: false
   tasks:
   - debug: var=msg

@@ -1,6 +1,6 @@
 ---
 - name: ansible.playbook.start
-  hosts: engine
+  hosts: localhost
   gather_facts: false
   tasks:
   - debug: var=msg
