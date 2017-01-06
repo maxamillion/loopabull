@@ -41,7 +41,7 @@ description = "Event loop driven Ansible playbook execution engine"
 
 setup(
     name='loopabull',
-    version='0.0.3',
+    version='0.0.4',
     description=description,
     long_description=description,
     classifiers=[
