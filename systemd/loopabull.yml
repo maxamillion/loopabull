@@ -25,6 +25,14 @@ routing_keys:
 #   playbooks_dir
 #     The full path location of the directory containing your playbooks that
 #     coorelate to the routing_keys
+#
+#   cfg_file_path
+#     Full path location of the ansible configuration to use
+#
+#   playbook_cmd
+#     Command to use in place of ansible-playbook (for those that want to use
+#     Ansible Tower commands or custom wrappers of their own)
 ansible:
   playbooks_dir: /usr/share/doc/loopabull/examples/playbooks/
-  inventory_path: /usr/share/doc/loopabull/examples/inventory.txt
+  cfg_file_path: /etc/ansible/ansible.cfg
+  playbook_cmd: /usr/bin/ansible-playbook
