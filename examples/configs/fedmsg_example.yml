@@ -10,5 +10,5 @@ routing_keys:
 plugins:
   looper:
     name: fedmsg
-  translater:
+  translator:
     name: rkname
