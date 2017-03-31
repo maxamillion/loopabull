@@ -26,20 +26,9 @@ class RedisLooper(Plugin):
         """
         Goes through and verifies the config settings and fall back to sane defaults
         """
-        if self.config["host"]:
-            self.host = self.config["host"]
-        else:
-            self.host = "127.0.0.1"
-        
-        if self.config["port"]:
-            self.port = self.config["port"]
-        else:
-            self.port = 6379
-        
-        if self.config["db"]:
-            self.db = self.config["db"]
-        else:
-            self.db = 0
+        self.config.get("host", "127.0.0.1")
+        self.config.get("port", 6379)
+        self.config.get("db", 0)
 
     def looper(self):
         """
