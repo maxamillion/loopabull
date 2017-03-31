@@ -1,4 +1,11 @@
+import logging
+logging.basicConfig()
+
 from enum import Enum
+
+logger = logging.getLogger('loopabull')
+logger.setLevel(logging.INFO)
+
 
 class Result(Enum):
     runfinished = 1

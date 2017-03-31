@@ -1,3 +1,5 @@
+loglevel: info
+
 ansible:
   playbooks_dir: examples/playbooks
   cfg_file_path: examples/ansible.cfg

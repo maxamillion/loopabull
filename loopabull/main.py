@@ -7,12 +7,13 @@ import os
 import sys
 import imp
 import yaml
+import logging
 import tempfile
 import argparse
 import subprocess
 
+import loopabull
 from loopabull import Result
-
 
 class Loopabull(object):
     """
@@ -41,6 +42,24 @@ class Loopabull(object):
             config = yaml.safe_load(conf_yaml)
 
         self.plugins_metadata = dict()
+
+        # Set log level from config file, allow for some common synonyms that
+        # people would likely expect to work.
+        #
+        # Default to info
+        conf_loglevel = config.get("loglevel", "info").lower()
+        if conf_loglevel in ["debug", "debugging"]:
+            loopabull.logger.setLevel(logging.DEBUG)
+            loopabull.logger.info("Log Level Set: DEBUG")
+        elif conf_loglevel in ["warn", "warning"]:
+            loopabull.logger.setLevel(logging.WARNING)
+            loopabull.logger.info("Log Level Set: WARNING")
+        elif conf_loglevel in ["error"]:
+            loopabull.logger.setLevel(logging.ERROR)
+            loopabull.logger.info("Log Level Set: ERROR")
+        elif conf_loglevel in ["info"]:
+            loopabull.logger.setLevel(logging.INFO)
+            loopabull.logger.info("Log Level Set: INFO")
 
         # Load user plugins
         for plugin, plugin_config in config["plugins"].items():
@@ -84,6 +103,8 @@ class Loopabull(object):
         plugin_data["module_name"] = name.capitalize() + plugin_type.capitalize()
         plugin_data["config"] = plugin_config
 
+        loopabull.logger.debug("plugin_data: {}".format(plugin_data))
+
         self.plugins_metadata[plugin_type] = plugin_data
 
     def load_plugin(self):
@@ -94,6 +115,14 @@ class Loopabull(object):
 
         for plugin_type in self.plugins_metadata:
             plugin_meta = self.plugins_metadata[plugin_type]
+
+            loopabull.logger.debug(
+                "plugin_type: {}\nplugin_metadata: {}\n".format(
+                    plugin_type,
+                    plugin_meta
+                )
+            )
+
             try:
                 plugin_path = os.path.join(
                     os.path.dirname(__file__),
@@ -126,6 +155,10 @@ class Loopabull(object):
         Run the playbooks
         """
         for plugin_rk, plugin_dict in self.plugins["looper"].looper():
+            loopabull.logger.debug(
+                "Routing key: {} Dict: {}".format(plugin_rk, plugin_dict)
+            )
+
             if plugin_rk not in self.routing_keys and self.routing_keys[0] != "all":
                 self.plugins["looper"].done(Result.unrouted)
                 continue

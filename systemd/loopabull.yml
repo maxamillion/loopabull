@@ -3,11 +3,33 @@
 # There are three main definitions: ansible, routing_keys, plugin. These will be
 # explained in comments above each section below.
 
-# plugin
+# loglevel
 #
-# This is the selected plugin that will interface with your prefered origin of
-# events (message bus or otherwise).
-plugin: fedmsg
+# The defaul loglevel is "info" but the following log levels are available
+#   - info
+#   - warn
+#   - error
+#   - debug
+loglevel: info
+
+# plugin section
+#
+# loopabull has two types of plugins:
+#
+#   looper: message bus python generator plugin that will interface with your
+#           prefered origin of events (message bus or otherwise).
+#
+#   translator: routing key translator which allows for alternative layouts
+#               on-disk for routing_key mappings to playbooks the default of
+#               "rkname" simple means that your playbooks share the same parent
+#               dir and are all named after the routing_key they correspond to
+#               in the message bus.
+#
+plugins:
+  looper:
+    name: fedmsg
+  translator:
+    name: rkname
 
 # routing_keys
 #
