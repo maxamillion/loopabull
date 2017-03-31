@@ -10,7 +10,7 @@ class RknameTranslator(Plugin):
     Loopabull Translator to check if routing_key is a valid string.
     This is the default method.
     """
-    def __init__(self):
+    def __init__(self, config={}):
         """
         stub init
         """
