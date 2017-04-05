@@ -142,7 +142,7 @@ class Loopabull(object):
                 ))
                 cmd.extend(['-e', '@{}'.format(tmp_varfile[-1])])
 
-                print 'Running: %s' % cmd
+                print('Running: %s' % cmd)
 
                 ansible_sp = subprocess.Popen(
                     cmd,
