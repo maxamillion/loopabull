@@ -46,4 +46,22 @@ class Plugin(object):
         """
         raise NotImplementedError()
 
+    def done(self, result, **kwargs):
+        """
+        a looper plugin can implement this method optionally
+
+        result is a value of loopabull.Result.
+
+        kwargs includes extra variables that depends on the result value.
+        For Result.runerrored, an exitcode kwarg is provided with the ansible
+        exit code.
+        For result.Error, an exception kwarg is provided with the Exception
+        object.
+
+        This function will always be called exactly once for every call to
+        looper(), and it will be the result of handling the very last returned
+        message by looper().
+        """
+        pass
+
 # vim: set expandtab sw=4 sts=4 ts=4
