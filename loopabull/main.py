@@ -11,6 +11,8 @@ import tempfile
 import argparse
 import subprocess
 
+from loopabull import Result
+
 
 class Loopabull(object):
     """
@@ -124,7 +126,11 @@ class Loopabull(object):
         Run the playbooks
         """
         for plugin_rk, plugin_dict in self.plugins["looper"].looper():
-            if plugin_rk in self.routing_keys or self.routing_keys[0] == "all":
+            if plugin_rk not in self.routing_keys and self.routing_keys[0] != "all":
+                self.plugins["looper"].done(Result.unrouted)
+                continue
+
+            try:
                 tmp_varfile = tempfile.mkstemp()
                 with open(tmp_varfile[-1], 'w') as yaml_file:
                     yaml.safe_dump(plugin_dict, yaml_file, allow_unicode=False)
@@ -136,12 +142,25 @@ class Loopabull(object):
                 ))
                 cmd.extend(['-e', '@{}'.format(tmp_varfile[-1])])
 
-                print 'Running: %s' % cmd
+                print('Running: %s' % cmd)
 
                 ansible_sp = subprocess.Popen(
                     cmd,
                     env={'ANSIBLE_CONFIG': self.ansible['cfg_file_path']}
                 )
                 ansible_sp.communicate()
+
+                if ansible_sp.returncode == 0:
+                    self.plugins["looper"].done(Result.runfinished)
+                    continue
+                else:
+                    self.plugins["looper"].done(
+                        Result.runerrored,
+                        exitcode=ansible_sp.returncode)
+                    continue
+            except Exception as ex:
+                self.plugins["looper"].done(Result.error, exception=ex)
+                # For now, we raise it (and thus crash).
+                raise
 
 # vim: set expandtab sw=4 sts=4 ts=4
