@@ -11,6 +11,6 @@ routing_keys:
 
 plugins:
   looper:
-    name: fedmsg
+    name: fedmsgrabbitmq
   translator:
     name: rkname
