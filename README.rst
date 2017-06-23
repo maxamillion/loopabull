@@ -6,9 +6,6 @@ loopabull
 
 .. image:: https://raw.githubusercontent.com/maxamillion/loopabull/master/images/loopabull.png
 
-NOTE: THIS IS PRE-ALPHA QUALITY AT THIS TIME - UNDER HEAVY DEVELOPMENT
-======================================================================
-
 Event loop driven `Ansible`_ `playbook`_ execution engine.
 
 General Concept
