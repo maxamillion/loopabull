@@ -143,5 +143,16 @@ class FedmsgrabbitmqLooper(Plugin):
             elif result in (Result.error, Result.runerrored):
                 self.channel.basic_nack(delivery_tag=self.delivery_tag)
 
+    def close(self):
+        """
+        Closes all connections.
+        """
+        requeued_messages = self.channel.cancel()
+        print('Requeued %i messages' % requeued_messages)
+
+        # Close the channel and the connection
+        self.channel.close()
+        self.connection.close()
+
 
 # vim: set expandtab sw=4 sts=4 ts=4

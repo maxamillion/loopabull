@@ -150,9 +150,9 @@ class Loopabull(object):
                 )
                 sys.exit(2)
 
-    def run(self):
+    def run_playbook(self):
         """
-        Run the playbooks
+        Run the playbooks.
         """
         for plugin_rk, plugin_dict in self.plugins["looper"].looper():
             loopabull.logger.debug(
@@ -195,5 +195,18 @@ class Loopabull(object):
                 self.plugins["looper"].done(Result.error, exception=ex)
                 # For now, we raise it (and thus crash).
                 raise
+
+    def run(self):
+        """
+        Run loopabull
+        """
+        try:
+            self.run_playbook()
+        except KeyboardInterrupt:
+            loopabull.logger.info(
+                "User stopped loopabull")
+        finally:
+            self.plugins["looper"].close()
+
 
 # vim: set expandtab sw=4 sts=4 ts=4
