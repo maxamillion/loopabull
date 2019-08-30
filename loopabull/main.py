@@ -190,12 +190,10 @@ class Loopabull(object):
 
                 if ansible_sp.returncode == 0:
                     self.plugins["looper"].done(Result.runfinished)
-                    continue
                 else:
                     self.plugins["looper"].done(
                         Result.runerrored,
                         exitcode=ansible_sp.returncode)
-                    continue
             except Exception as ex:
                 loopabull.logger.exception(
                     "An un-expected exception was raised in the code")
