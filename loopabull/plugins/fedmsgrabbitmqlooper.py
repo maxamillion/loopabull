@@ -137,10 +137,10 @@ class FedmsgrabbitmqLooper(Plugin):
 
         logging.info("RESULT: {}".format(result))
 
-        if self.delivery_tag:
+        if self.delivery_tag is not None:
             if result in (Result.runfinished, Result.unrouted):
                 self.channel.basic_ack(delivery_tag=self.delivery_tag)
-            elif result == (Result.error, Result.runerrored):
+            elif result in (Result.error, Result.runerrored):
                 self.channel.basic_nack(delivery_tag=self.delivery_tag)
 
 
