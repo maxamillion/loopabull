@@ -135,13 +135,17 @@ class FedmsgrabbitmqLooper(Plugin):
         looper execution completion handler
         """
 
-        logging.info("RESULT: {}".format(result))
+        self.logger.info("RESULT: {}".format(result))
 
         if self.delivery_tag is not None:
             if result in (Result.runfinished, Result.unrouted):
+                self.logger.info("acking message: %s", self.delivery_tag)
                 self.channel.basic_ack(delivery_tag=self.delivery_tag)
             elif result in (Result.error, Result.runerrored):
+                self.logger.info("nacking message: %s", self.delivery_tag)
                 self.channel.basic_nack(delivery_tag=self.delivery_tag)
+        else:
+            self.logger.info("No delivery tag found")
 
     def close(self):
         """
