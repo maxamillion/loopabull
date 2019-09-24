@@ -64,4 +64,15 @@ class Plugin(object):
         """
         pass
 
+
+    def close(self):
+        """
+        a looper plugin can implement this method optionally
+
+        This function will be called when loopabull stops. It allows the
+        plugin to close any connections that may need to be close at the
+        end of the process.
+        """
+        pass
+
 # vim: set expandtab sw=4 sts=4 ts=4

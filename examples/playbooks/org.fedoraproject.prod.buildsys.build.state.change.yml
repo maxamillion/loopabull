@@ -4,3 +4,23 @@
   gather_facts: false
   tasks:
   - debug: var=msg
+
+- name: run a small debug script
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Install my own script
+    copy:
+        src: files/debug.py
+        dest: /var/tmp/loopabull_debug.py
+        mode: 0755
+
+  - name: Run the script
+    command: /var/tmp/loopabull_debug.py '{{ msg | tojson }}'
+    register: output
+    environment:
+        MY_ENV_VARIABLE: 'whatever_value'
+
+  - name: Show the output of the script
+    debug:
+        msg: "Output of the script: {{ output }}"

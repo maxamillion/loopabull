@@ -150,16 +150,19 @@ class Loopabull(object):
                 )
                 sys.exit(2)
 
-    def run(self):
+    def run_playbook(self):
         """
-        Run the playbooks
+        Run the playbooks.
         """
+        loopabull.logger.info("Waiting on messages")
         for plugin_rk, plugin_dict in self.plugins["looper"].looper():
+            loopabull.logger.info("Message from routing key: %s", plugin_rk)
             loopabull.logger.debug(
-                "Routing key: {} Dict: {}".format(plugin_rk, plugin_dict)
+                "Message dict: {}".format(plugin_rk, plugin_dict)
             )
 
             if plugin_rk not in self.routing_keys and self.routing_keys[0] != "all":
+                loopabull.logger.info("Unsupported routing_key: %s", plugin_rk)
                 self.plugins["looper"].done(Result.unrouted)
                 continue
 
@@ -182,18 +185,33 @@ class Loopabull(object):
                     env={'ANSIBLE_CONFIG': self.ansible['cfg_file_path']}
                 )
                 ansible_sp.communicate()
+                loopabull.logger.info(
+                    "Ansible run done and returned: %s", ansible_sp.returncode)
 
                 if ansible_sp.returncode == 0:
                     self.plugins["looper"].done(Result.runfinished)
-                    continue
                 else:
                     self.plugins["looper"].done(
                         Result.runerrored,
                         exitcode=ansible_sp.returncode)
-                    continue
             except Exception as ex:
+                loopabull.logger.exception(
+                    "An un-expected exception was raised in the code")
                 self.plugins["looper"].done(Result.error, exception=ex)
                 # For now, we raise it (and thus crash).
                 raise
+
+    def run(self):
+        """
+        Run loopabull
+        """
+        try:
+            self.run_playbook()
+        except KeyboardInterrupt:
+            loopabull.logger.info(
+                "User stopped loopabull")
+        finally:
+            self.plugins["looper"].close()
+
 
 # vim: set expandtab sw=4 sts=4 ts=4

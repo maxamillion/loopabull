@@ -12,5 +12,27 @@ routing_keys:
 plugins:
   looper:
     name: fedmsgrabbitmq
+    credentials:
+        username: fedora
+        password:
+    tls:
+        ca_cert: "/etc/fedora-messaging/cacert.pem"
+        keyfile: "/etc/fedora-messaging/fedora-key.pem"
+        certfile: "/etc/fedora-messaging/fedora-cert.pem"
+    rabbitmq:
+        host: rabbitmq.fedoraproject.org
+        virtual_host: /public_pubsub
+    routing_keys:
+        - org.fedoraproject.prod.ansible.playbook.start
+        - org.fedoraproject.prod.buildsys.build.state.change
+    exchange:
+        name: amq.topic
+    channel_queue:
+        name: 00000000-0000-0000-0000-000000000000
+        durable: false
+        auto_delete: true
+        exclusive: true
+
+
   translator:
     name: rkname
