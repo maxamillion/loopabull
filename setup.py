@@ -41,13 +41,14 @@ description = "Event loop driven Ansible playbook execution engine"
 
 setup(
     name='loopabull',
-    version='0.0.5',
+    version='0.0.7',
     description=description,
     long_description=description,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Topic :: System :: Systems Administration',
     ],
     author='Adam Miller',
